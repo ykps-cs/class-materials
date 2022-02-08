@@ -1,0 +1,49 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=0.75in, top=1in, bottom=1in, a4paper]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{pgfplots}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{indentfirst}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+
+\definecolor{codegray}{gray}{0.9}
+\newcommand{\code}[1]{\colorbox{codegray}{\texttt{#1}}}
+
+\title{\vspace{-2.0cm}Beginners' Guide to Object-Oriented Programming}
+\author{Linxuan Ma}
+
+\begin{document}
+	\maketitle
+	
+	\abstract{This guide aims to layout the foundations and prerequisites for a student to proficiently program with object-oriented concepts. This guide intends to have a gradual learning curve and focuses on establishing a solid theoretical foundation before application to alleviate the "WHY THE HELL IS MY COMPILER SCREAMING AT ME" symptom that every programmer faces when starting off. Working knowledge with Java (minus the OOP part) is required.}
+	
+	\section{Prerequisite: Objects}
+	
+	The core principle of object-oriented programming, or arguable any form of programming, is to abstract away the tedious implementation details and instead deal with simpler, higher-level concepts. One such example is the concept of function. Similar to its counterpart in mathematics, a function in the scope of computer science is a piece of \emph{sealed} code whose implementation is irrelevant given that we are the caller and we know what it does conceptually. The function's \textit{behavior} is the higher-level concept which we are interested in; the function's implementation detail is the lower-level that we abstract away. Function is an abstraction for the \emph{procedure} of a program.
+	
+	Similarly, \emph{object} is an abstraction for the data of a program (loosely speaking). Instead of dealing with a plethora of arbitrary attributes and data in a program, we can instead group them into units called \emph{objects}. This pattern allows us to have an array of \code{Person} instead of an abominable pile of \code{int[] age} and \code{String[] name}.
+	
+	Having a bunch of "grouped" data is pretty useless by itself, as there wouldn't be a simple way to navigate and manipulate them. Therefore, instead of having arbitrary blobs of data with anonymous identity, Java associates each object with a \emph{type}, which dictates the behavior and organization of the data within the object.
+	
+	\begin{defn}
+		An \emph{object} is a container for data, and has the following information:
+		\begin{itemize}
+			\item Type: a "blueprint" which specifies the behavior of the object
+			\item Attributes: information contained in the object as fields
+		\end{itemize}
+	\end{defn}
+	
+	The concept of attribute is trivial; they are just what you put as fields in the class declaration of the object, e.g. \code{private int age}. The concept of type, on the other hand, requires much more attention, and is one of the core concept of object-oriented programming.
+	
+	\section{Theoretical Foundation of Types}
+	
+	"Type" might be a major source of confusion, only worsened by the more abstract ideas that "type" induces (e.g. polymorphism, variance). To simplify things, we will use simple mathematics concepts to illustrate the relation between types and objects, as well as the relation between types and types.
+	
+\end{document}
