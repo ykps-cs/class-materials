@@ -15,6 +15,7 @@
 
 \definecolor{codegray}{gray}{0.9}
 \newcommand{\code}[1]{\colorbox{codegray}{\texttt{#1}}}
+\newcommand{\ttype}[1]{\textbf{T}_\text{#1}}
 
 \title{\vspace{-2.0cm}Beginners' Guide to Object-Oriented Programming}
 \author{Linxuan Ma}
@@ -45,5 +46,11 @@
 	\section{Theoretical Foundation of Types}
 	
 	"Type" might be a major source of confusion, only worsened by the more abstract ideas that "type" induces (e.g. polymorphism, variance). To simplify things, we will use simple mathematics concepts to illustrate the relation between types and objects, as well as the relation between types and types.
+	
+	Types display remarkable resemblance of the mathematical sets, and in the scope of OOP we can treat them as such. A type is just a set whose elements are objects. Some examples are:
+	\begin{align*}
+		\ttype{Integer} &= \{\dots, -1, 0, 1, \dots\} \\
+		\ttype{Boolean} &= \{\textbf{true}, \textbf{false}\}
+	\end{align*}
 	
 \end{document}
