@@ -36,7 +36,7 @@
 	\begin{defn}
 		An \emph{object} is a container for data, and has the following information:
 		\begin{itemize}
-			\item Type: a "blueprint" which specifies the behavior of the object
+			\item Class: a "blueprint" which specifies the behavior of the object
 			\item Attributes: information contained in the object as fields
 		\end{itemize}
 	\end{defn}
@@ -47,10 +47,27 @@
 	
 	"Type" might be a major source of confusion, only worsened by the more abstract ideas that "type" induces (e.g. polymorphism, variance). To simplify things, we will use simple mathematics concepts to illustrate the relation between types and objects, as well as the relation between types and types.
 	
-	Types display remarkable resemblance of the mathematical sets, and in the scope of OOP we can treat them as such. A type is just a set whose elements are objects. Some examples are:
+	Types display remarkable resemblance of mathematical sets, and we can treat them as such in the scope of OOP. A type is just a set whose elements are objects. Some examples are:
 	\begin{align*}
 		\ttype{Integer} &= \{\dots, -1, 0, 1, \dots\} \\
 		\ttype{Boolean} &= \{\textbf{true}, \textbf{false}\}
 	\end{align*}
+	
+	We can check if an object is of a type by using the \code{instanceof} operator in Java. Such a check is equivalent to checking if an object is an element in the type's set in our mathematical notion:
+	\begin{gather*}
+		x \text{ is of type \code{Person}}  \iff x \in \ttype{Person}
+	\end{gather*}
+	
+	\subsection{Notion of Equivalence}
+	
+	To construct a set, we must define the notion of equivalence with regards to its elements. How shall we define equivalence over the objects of a type in Java? Unfortunately, there are two kinds of equivalence in Java (consider objects \code{a} and \code{b}):
+	\begin{enumerate}
+		\item \code{a == b}: compares whether the two references to objects are the same, i.e. if \code{a} and \code{b} refers to the \emph{same} object
+		\item \code{a.equals(b)}: a programmer-defined equivalence behavior for the objects by overriding \code{Object\#equals}
+	\end{enumerate}
+	
+	To illustrate, \code{new String("hello") == new String("hello")} would be false, as the two references being compared are different objects despite containing the same content. However, \code{new String("hello").equals(new String("hello"))} would be true, as the two strings contain the same content, and thereby satisfy the requirement of equivalence as defined in \code{String\#equals} by the author of the \code{String} class.
+	
+	For the rest of this guide, all equivalence of objects is \code{Object\#equals} unless stated otherwise.
 	
 \end{document}
