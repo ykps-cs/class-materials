@@ -8,6 +8,9 @@
 \usepackage{mathtools}
 \usepackage{booktabs}
 \usepackage{indentfirst}
+\usepackage{tikz-cd}
+\usepackage{mathtools}
+\usepackage[colorlinks, linkcolor=blue]{hyperref}
 
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}[section]
@@ -15,7 +18,8 @@
 
 \definecolor{codegray}{gray}{0.9}
 \newcommand{\code}[1]{\colorbox{codegray}{\texttt{#1}}}
-\newcommand{\ttype}[1]{\textbf{T}_\text{#1}}
+\newcommand{\ttype}[1]{\text{#1}}
+\newcommand{\gtype}[1]{\textbf{T}_\text{#1}}
 
 \title{\vspace{-2.0cm}Beginners' Guide to Object-Oriented Programming}
 \author{Linxuan Ma}
@@ -58,16 +62,51 @@
 		x \text{ is of type \code{Person}}  \iff x \in \ttype{Person}
 	\end{gather*}
 	
+	\subsection{Methods}
+	
+	\subsection{Types and Classes}
+	
+	As mentioned above, each object is associated with a class whose content dictates the object's behavior. A class is a type, among with interface types and primitive types (see \hyperref[sec:primitives]{Remarks 2}). Each object must belong to a class with which the object is instantiated. The class of an object is the immediate type that contains it, i.e. the smallest type set that contains the object.
+	
+	Apart from class types, there are also interface types. Interface types are the more abstract types that exists to solely denote certain capabilities in the form of \emph{abstract methods}.
+	
+	\begin{defn}
+		An \emph{abstract method} is a method that only possesses a signature (see \hyperref[sec:signature]{Remark 3}) and no actual code. It exists as a requirement such that all classes that implement the method's interface must provide an implementation of the abstract method according to its anticipated behavior.
+	\end{defn}
+	
+	Abstract methods enforces all instance objects to provide an implementation of it. For instance, an abstract method $\text{f}_\text{die}	: \ttype{IAnimal} \to \ttype{Void}$ declared in the interface \code{IAnimal} states that "all \code{IAnimal}s can die". Due to the vast potential difference present in the inheriting classes of \code{IAnimal}, the interface does not know an implementation that satisfies all of them, and therefore leaves the implementation to each class to decide. Nonetheless, each inheriting class must provide a way for the animal to die.
+	
+	For instance, consider the inheritance hierarchy:
+	\begin{equation*}\begin{tikzcd}
+		& \ttype{IAnimal}\\
+		\ttype{IMarine} \ar[ru] && \ttype{IVertebrate} \ar[lu] \\
+		& \ttype{Fish} \ar[lu] \ar[ru]
+	\end{tikzcd}\end{equation*}
+	
+	An object $a \in \ttype{Fish}$ has the class \code{Fish}. Since \code{Fish} inherits \code{IMarine} and \code{IVertebrate}, $a$ is also a member of \code{IMarine} and \code{IVertebrate}, as well as \code{IAnimal}. $a$ is an instance of all four types mentioned above, yet its unique class is \code{Fish}. This shows that an object can be an instance of many types, but only belongs to one class.
+	
+	Note that even if an object $a \in \gtype{A}$ and $\gtype{A} \subset \gtype{B}$ where $\gtype{A}$ and $\gtype{B}$ are both classes, the class of $a$ is still $\gtype{A}$ (as it is the smallest set containing $a$), and can be witnessed by calling \code{a.getClass()}.
+	
 	\subsection{Notion of Equivalence}
 	
 	To construct a set, we must define the notion of equivalence with regards to its elements. How shall we define equivalence over the objects of a type in Java? Unfortunately, there are two kinds of equivalence in Java (consider objects \code{a} and \code{b}):
 	\begin{enumerate}
 		\item \code{a == b}: compares whether the two references to objects are the same, i.e. if \code{a} and \code{b} refers to the \emph{same} object
-		\item \code{a.equals(b)}: a programmer-defined equivalence behavior for the objects by overriding \code{Object\#equals}
+		\item \code{a.equals(b)}: a programmer-defined equivalence behavior for the object by overriding \code{Object\#equals}
 	\end{enumerate}
 	
 	To illustrate, \code{new String("hello") == new String("hello")} would be false, as the two references being compared are different objects despite containing the same content. However, \code{new String("hello").equals(new String("hello"))} would be true, as the two strings contain the same content, and thereby satisfy the requirement of equivalence as defined in \code{String\#equals} by the author of the \code{String} class.
 	
-	For the rest of this guide, all equivalence of objects is \code{Object\#equals} unless stated otherwise.
+	For the rest of this guide, equivalence of objects refers to \code{Object\#equals} unless stated otherwise.
+	
+	\section{Remarks}
+	
+	\subsection{Function Notation}
+	
+	\subsection{Primitive Types}
+	\label{sec:primitives}
+	
+	\subsection{Method Signatures}
+	\label{sec:signature}
 	
 \end{document}
